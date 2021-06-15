@@ -1,7 +1,10 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;;
+    font-family: 'Roboto', sans-serif;
+    
+    
+
 }
 a {
     text-decoration: none;
@@ -55,6 +58,7 @@ nav ul li a {
     font-size: 18px;
     padding-left: 25px;
     background-color: rgba(255, 255, 255, 0);
+    width: 100%;
 }
 
 .search-btn {
@@ -99,7 +103,7 @@ nav ul li a {
 }
 
 .food-section {
-    position: relative;
+    position: absolute;
     top: 0;
     background-color: rgba(0, 0, 0, 0.9);
     width: 100%;
@@ -111,7 +115,7 @@ nav ul li a {
 
 
 .food-detail {
-    width: 900px;
+    width: 700px;
     height: 800px;
     margin: auto;
     position: absolute;

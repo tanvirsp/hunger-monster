@@ -43,54 +43,61 @@
         </div>
     </header>
 
-    <section>
-        <div class="search-box container">
-            <i class="fas fa-search"></i>
-            <input id="search-input" type="text" name="" id="search-bar" placeholder="Search for Meal...">
-            <button id="search-button" class="search-btn">Search</button>
-        </div>
-    </section>
+    <div id="search-food-meals">
+        <section>
+            <div class="search-box container">
+                <i class="fas fa-search"></i>
+                <input id="search-input" type="text" name="" id="search-bar" placeholder="Search for Meal...">
+                <button id="search-button" class="search-btn">Search</button>
+            </div>
+        </section>
+    
 
-    <!-- Menu Item Container -->
-    <section class="container">
-        <div id="search-list" class="row">
-            <!-- <div class="col-md-3 ">
-                <a href="">
-                    <div class="menu-item">
-                        <img src="images/foodItem.png" alt="">
-                        <h3>Mustard champ</h3>
-                    </div>
-                </a>
-            </div> -->
-          
+        <section class="container">
+            <h2 id="search-result-text" class="text-center">Your Search Result :</h2>
+            <h2 id="not-found" class="text-center text-danger">Sorry! We don't find any Meal</h2>
+            <!-- <h2 id="valid-name" class="text-center text-danger">Please Put Valid Meal Name</h2> -->
             
-            
+        </section>
 
-        </div>
-    </section>
 
-    <section class="container">
-        <h2 class="text-center">Your Search Result :</h2>
-        <h2 id="not-found" class="text-center text-danger">Sorry! We don't find any Meal</h2>
+        <!-- Menu Item Container -->
+        <section class="container">
+            <div id="search-list" class="row">
+                <!-- <div class="col-md-3 ">
+                    <a href="">
+                        <div class="menu-item">
+                            <img src="images/foodItem.png" alt="">
+                            <h3>Mustard champ</h3>
+                        </div>
+                    </a>
+                </div> -->
+              
+                
+                
+    
+            </div>
+        </section>
+    
         
-    </section>
+    </div>
 
     <!-- Item Details Container -->
-    <section class="food-section">
+    <section id="food-details-section" class="food-section">
         <div class="food-detail">
-            <div class="close"><i class="fas fa-times"></i></div>
+            <div id="close-btn" class="close"><i class="fas fa-times"></i></div>
             <div class="top-img">
-                <img src="images/foodItem.png" alt="">
+                <img id="detail-img" class ="img-fluid" src=""  alt="">
             </div>
             <div class="details">
-                <h3>Mustard champ</h3>
+                <h3 id="details-title"></h3>
                 <h5>Ingredients</h5>
-                <p>1 cup whole raw almonds</p>
-                <p>1 cup whole raw almonds</p>
-                <p>1 cup whole raw almonds</p>
-                <p>1 cup whole raw almonds</p>
+                <div id="ingredient-container">
+                    
                 
-               
+
+                </div>
+                
             </div>
         </div>
        

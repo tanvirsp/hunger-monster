@@ -1,18 +1,24 @@
 const searchBtn = document.getElementById('search-button');
     searchBtn.addEventListener('click', function(){
     const searchInput = document.getElementById('search-input').value;
-    console.log(searchInput);
     
-    searchFood(searchInput)
-
+    if (searchInput.length > 0){
+        searchFood(searchInput)
+       
+    }
+    else{
+        document.getElementById('search-result-text').innerHTML = `<span class="text-danger">Please Put Valid Meal Name</span>`;
+    }
 })
+// 
 
 function searchFood(inputValue){
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${inputValue}`)
+    document.getElementById('search-result-text').innerHTML = `<span>Your Search Result:</span>`;
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
     .then(res => res.json())
     .then(data => {
         const allMeals = data.meals;
-        
         const searchList = document.getElementById('search-list');
         let searchItem = "";
 
@@ -20,15 +26,11 @@ function searchFood(inputValue){
             allMeals.forEach(meal => {
                 searchItem += `
                                 <div class="col-md-3 my-3 ">
-                                   
                                         <div onclick="getDetails(${meal.idMeal})" class="menu-item">
-                                            
                                             <img src=${meal.strMealThumb} alt="">
                                             <h3>${meal.strMeal}</h3>
-                                            <h4>${meal.idMeal}</h4>
                                             </a>
                                         </div>
-                                    
                                 </div> `
             });
         }
@@ -45,18 +47,55 @@ function searchFood(inputValue){
 
 
 
-// const searchList = document.getElementById('search-list');
-// searchList.addEventListener('click', function(e){
-//     console.log(e.target)
-    
-// })
-
+//Meal Details section
 
 const getDetails = (mealId)=>{
+    document.getElementById('food-details-section').style.display ='block';
+    document.getElementById('search-food-meals').style.display="none";
+    
+
 
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
     .then(res =>res.json())
     .then(data =>{
-        console.log(data)
+        // console.log(data.meals[0]);
+        const meal = data.meals[0];
+        addMealToDom(meal);
+
     })
 };
+
+
+//Add Meal to DOM
+const addMealToDom = (meal) =>{
+    //Details Title
+    document.getElementById('details-title').innerText = meal.strMeal;
+    //Details Thumbnail
+    document.getElementById('detail-img').src = meal.strMealThumb;
+    
+    
+    const container = document.getElementById('ingredient-container');
+    container.innerHTML = '';
+    
+    
+    for(let i =0; i<= 20; i++){
+        if(meal[`strIngredient${i}`]){
+         
+            const ingredient = document.createElement('p')
+            ingredient.innerHTML = `${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}`
+            container.appendChild(ingredient);
+                    
+            // console.log( `${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}` );
+        }           
+    }
+}
+
+
+
+//Close Button Handelar
+const closeBtn = document.getElementById('close-btn');
+closeBtn.addEventListener('click', function(){
+    document.getElementById('food-details-section').style.display="none";
+    document.getElementById('search-food-meals').style.display="block";
+    
+});
