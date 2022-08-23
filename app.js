@@ -12,15 +12,31 @@ const searchBtn = document.getElementById('search-button');
 })
 // 
 
+
+document.getElementById('search-input').addEventListener("keypress", function(event){
+    if (event.key === 'Enter') {
+        document.getElementById("search-button").click();
+       }
+})
+
+
+
+
 function searchFood(inputValue){
     document.getElementById('search-result-text').innerHTML = `<span>Your Search Result:</span>`;
+    
+    //Show Spniner
+    toggleSpinner()
 
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
     .then(res => res.json())
     .then(data => {
         const allMeals = data.meals;
         const searchList = document.getElementById('search-list');
+        
         let searchItem = "";
+
+       
 
         if(allMeals){
             allMeals.forEach(meal => {
@@ -38,11 +54,16 @@ function searchFood(inputValue){
             console.log('Meal not found')
             document.getElementById('not-found').style.display ="block"
         }
-       
         //loop end
-        //adding whole html in UI
-        searchList.innerHTML = searchItem;   
+        toggleSpinner()
+        
+
+   
+         //adding whole html in UI
+        searchList.innerHTML = searchItem;  
+       
     })
+    
 }
 
 
@@ -52,8 +73,10 @@ function searchFood(inputValue){
 const getDetails = (mealId)=>{
     document.getElementById('food-details-section').style.display ='block';
     document.getElementById('search-food-meals').style.display="none";
-    
 
+    
+    
+    
 
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
     .then(res =>res.json())
@@ -63,6 +86,7 @@ const getDetails = (mealId)=>{
         addMealToDom(meal);
 
     })
+  
 };
 
 
@@ -99,3 +123,12 @@ closeBtn.addEventListener('click', function(){
     document.getElementById('search-food-meals').style.display="block";
     
 });
+
+
+
+//Toggle Spinner
+function toggleSpinner(){
+    const spinner =  document.getElementById("spinner");
+    spinner.classList.toggle("d-none");
+
+}
